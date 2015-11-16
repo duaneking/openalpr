@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="openalpr : Automatic License Plate Recognition library">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>openalpr</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/openalpr/openalpr">View on GitHub</a>
+
+          <h1 id="project_title">openalpr</h1>
+          <h2 id="project_tagline">Automatic License Plate Recognition library</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/openalpr/openalpr/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/openalpr/openalpr/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="openalpr" class="anchor" href="#openalpr" aria-hidden="true"><span class="octicon octicon-link"></span></a>openalpr</h1>
+
+<p>OpenALPR is an open source <em>Automatic License Plate Recognition</em> library written in C++ with bindings in C#, Java, Node.js, and Python.  The library analyzes images and video streams to identify license plates.  The output is the text representation of any license plate characters.</p>
+
+<p>Check out a live online demo here: <a href="http://www.openalpr.com/demo-image.html">http://www.openalpr.com/demo-image.html</a></p>
+
+<h2>
+<a id="user-guide" class="anchor" href="#user-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Guide</h2>
+
+<p>OpenALPR includes a command line utility.  Simply typing "alpr [image file path]" is enough to get started recognizing license plate images.</p>
+
+<p>For example, the following output is created by analyzing this image:
+<img src="http://www.openalpr.com/images/demoscreenshots/plate3.png" alt="Plate Image" title="Input image"></p>
+
+<pre><code>user@linux:~/openalpr$ alpr ./samplecar.png
+
+plate0: top 10 results -- Processing Time = 58.1879ms.
+    - PE3R2X     confidence: 88.9371
+    - PE32X      confidence: 78.1385
+    - PE3R2      confidence: 77.5444
+    - PE3R2Y     confidence: 76.1448
+    - P63R2X     confidence: 72.9016
+    - FE3R2X     confidence: 72.1147
+    - PE32       confidence: 66.7458
+    - PE32Y      confidence: 65.3462
+    - P632X      confidence: 62.1031
+    - P63R2      confidence: 61.5089
+
+</code></pre>
+
+<p>Detailed command line usage:</p>
+
+<pre><code>user@linux:~/openalpr$ alpr --help
+
+USAGE: 
+
+   alpr  [-c &lt;country_code&gt;] [--config &lt;config_file&gt;] [-n &lt;topN&gt;] [--seek
+         &lt;integer_ms&gt;] [-p &lt;pattern code&gt;] [--clock] [-d] [-j] [--]
+         [--version] [-h] &lt;image_file_path&gt;
+
+
+Where: 
+
+   -c &lt;country_code&gt;,  --country &lt;country_code&gt;
+     Country code to identify (either us for USA or eu for Europe). 
+     Default=us
+
+   --config &lt;config_file&gt;
+     Path to the openalpr.conf file
+
+   -n &lt;topN&gt;,  --topn &lt;topN&gt;
+     Max number of possible plate numbers to return.  Default=10
+
+   --seek &lt;integer_ms&gt;
+     Seek to the specied millisecond in a video file. Default=0
+
+   -p &lt;pattern code&gt;,  --pattern &lt;pattern code&gt;
+     Attempt to match the plate number against a plate pattern (e.g., md
+     for Maryland, ca for California)
+
+   --clock
+     Measure/print the total time to process image and all plates. 
+     Default=off
+
+   -d,  --detect_region
+     Attempt to detect the region of the plate image.  [Experimental] 
+     Default=off
+
+   -j,  --json
+     Output recognition results in JSON format.  Default=off
+
+   --,  --ignore_rest
+     Ignores the rest of the labeled arguments following this flag.
+
+   --version
+     Displays version information and exits.
+
+   -h,  --help
+     Displays usage information and exits.
+
+   &lt;image_file_path&gt;
+     Image containing license plates
+
+
+   OpenAlpr Command Line Utility
+
+</code></pre>
+
+<h2>
+<a id="binaries" class="anchor" href="#binaries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Binaries</h2>
+
+<p>Pre-compiled Windows binaries can be downloaded on the <a href="https://github.com/openalpr/openalpr/releases">releases page</a></p>
+
+<p>Install OpenALPR on Ubuntu 14.04 x64 with the following commands:</p>
+
+<pre><code>wget -O - http://deb.openalpr.com/openalpr.gpg.key | sudo apt-key add -
+echo "deb http://deb.openalpr.com/master/ openalpr main" | sudo tee /etc/apt/sources.list.d/openalpr.list
+sudo apt-get update
+sudo apt-get install openalpr openalpr-daemon openalpr-utils libopenalpr-dev
+</code></pre>
+
+<h2>
+<a id="integrating-the-library" class="anchor" href="#integrating-the-library" aria-hidden="true"><span class="octicon octicon-link"></span></a>Integrating the Library</h2>
+
+<p>OpenALPR is written in C++ and has bindings in C#, Python, Node.js, and Java.  Please see this guide for examples showing how to run OpenALPR in your application: <a href="https://github.com/openalpr/openalpr/wiki/Integrating-OpenALPR">https://github.com/openalpr/openalpr/wiki/Integrating-OpenALPR</a></p>
+
+<h2>
+<a id="compiling" class="anchor" href="#compiling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compiling</h2>
+
+<p><a href="https://travis-ci.org/openalpr/openalpr"><img src="https://travis-ci.org/openalpr/openalpr.svg?branch=master" alt="Build Status"></a></p>
+
+<p>OpenALPR compiles and runs on Linux, Mac OSX and Windows.</p>
+
+<p>OpenALPR requires the following additional libraries:</p>
+
+<pre><code>- Tesseract OCR v3.0.3 (https://code.google.com/p/tesseract-ocr/)
+- OpenCV v2.4.8+ (http://opencv.org/)
+</code></pre>
+
+<p>After cloning this GitHub repository, you should download and extract Tesseract and OpenCV source code into their own directories.  Compile both libraries.</p>
+
+<p>Please follow these detailed compilation guides for your respective operating system:</p>
+
+<ul>
+<li><a href="https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Windows)">Windows</a></li>
+<li><a href="https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(Ubuntu-Linux)">Ubuntu Linux</a></li>
+<li><a href="https://github.com/openalpr/openalpr/wiki/Compilation-instructions-(OS-X)">OS X</a></li>
+<li><a href="https://github.com/sujaybhowmick/OpenAlprDroidApp">Android</a></li>
+<li><a href="https://github.com/twelve17/openalpr-ios">iOS</a></li>
+</ul>
+
+<p>If all went well, there should be an executable named <em>alpr</em> along with <em>libopenalpr-static.a</em> and <em>libopenalpr.so</em> that can be linked into your project.</p>
+
+<h2>
+<a id="docker" class="anchor" href="#docker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Docker</h2>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"># Build docker image</span>
+docker build -t openalpr https://github.com/openalpr/openalpr.git
+<span class="pl-c"># Download test image</span>
+wget http://plates.openalpr.com/h786poj.jpg
+<span class="pl-c"># Run alpr on image</span>
+docker run -it --rm -v <span class="pl-s"><span class="pl-pds">$(</span><span class="pl-c1">pwd</span><span class="pl-pds">)</span></span>:/data:ro openalpr -c eu h786poj.jpg</pre></div>
+
+<h2>
+<a id="questions" class="anchor" href="#questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Questions</h2>
+
+<p>Please post questions or comments to the Google group list: <a href="https://groups.google.com/forum/#!forum/openalpr">https://groups.google.com/forum/#!forum/openalpr</a></p>
+
+<h2>
+<a id="contributions" class="anchor" href="#contributions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributions</h2>
+
+<p>Improvements to the OpenALPR library are always welcome.  Please review the <a href="https://github.com/openalpr/openalpr/wiki/OpenALPR-Design">OpenALPR design description</a> and get started.</p>
+
+<p>Code contributions are not the only way to help out.  Do you have a large library of license plate images?  If so, please upload your data to the anonymous FTP located at upload.openalpr.com.  Do you have time to "tag" plate images in an input image or help in other ways?  Please let everyone know by posting a note in the forum.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Affero GPLv3
+<a href="http://www.gnu.org/licenses/agpl-3.0.html">http://www.gnu.org/licenses/agpl-3.0.html</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">openalpr maintained by <a href="https://github.com/openalpr">openalpr</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-46999297-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
